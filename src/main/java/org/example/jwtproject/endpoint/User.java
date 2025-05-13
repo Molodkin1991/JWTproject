@@ -3,6 +3,9 @@ package org.example.jwtproject.endpoint;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity(name = "my_users")
 @Data
 public class User {
@@ -12,8 +15,8 @@ public class User {
     private String username;
     private String password;
     private Role role;
-    @ManyToOne
-    @JoinColumn(name = "post_id")
-    private Post post;
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Post> posts = new ArrayList<>();
+
 
 }

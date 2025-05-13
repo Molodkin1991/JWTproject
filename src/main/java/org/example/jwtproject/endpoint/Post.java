@@ -6,13 +6,18 @@ import lombok.Data;
 @Entity
 @Data
 public class Post {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "owner_id")
-    private User owner;
+
+    @Column(nullable = false)
     private String title;
+
+    @Column(length = 2000)
     private String content;
+
+    @ManyToOne
+    @JoinColumn(name = "author_id", nullable = false)
+    private User author;
+
 
 }
